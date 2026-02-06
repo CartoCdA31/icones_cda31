@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Carte Lot - MapTiler + MapLibre</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <link href="https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <style>
+    body { margin: 0; padding: 0; font-family: sans-serif; }
+    #map  { position: absolute; top: 0; bottom: 0; width: 100%; }
+    .mapboxgl-ctrl-top-right { right: 10px !important; }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script src="https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.js"></script>
+<script>
+  const API_KEY = 'R7Gb0rJJL3Ed32SUfdG5'; // Ta clé MapTiler
+
+  const map = new maplibregl.Map({
+    container: 'map',
+    style: `https://api.maptiler.com/maps/019c2dd0-8770-767f-aa4b-c0f7c96aad35/style.json?key=${API_KEY}`,
+    center: [1.15697, 44.70314], // Centre Lot
+    zoom: 4
+  });
+
+  // Contrôles standards
+  map.addControl(new maplibregl.NavigationControl(), 'top-right');
+  map.addControl(new maplibregl.FullscreenControl(), 'top-right');
+
+  // Attribution personnalisée (obligatoire)
+  map.addControl(new maplibregl.AttributionControl({
+    customAttribution: '© MapTiler © OpenStreetMap contributors'
+  }));
+
+  map.on('load', () => {
+    console.log('Carte chargée ! Prêt à ajouter tes données.');
+  });
+</script>
+</body>
+</html>
